@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #define QNTD 10
 
 int main(void) 
@@ -20,4 +20,4 @@ int main(void)
   for(kcont=0;kcont<QNTD;kcont++)
     if(idade[kcont]>media)
       printf("%d ", idade[kcont]);
-}
+}*/
