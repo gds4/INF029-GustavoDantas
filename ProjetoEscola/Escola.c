@@ -1,11 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define Tam_Nome 100
-#define Tam_Data 10
+#include <string.h>
+
+#define Tam_Nome 101
+#define Tam_Data 11
+#define QTD_Alunos 5
+
+int TelaInicial();
+int MenuPrincipal();
+int MenudeAlunos();
+int MenudeProfessores();
+int MenudeDisciplina();
+int MenuRelatorios();
 
 typedef struct {
   int Matricula;
-  int Nome[Tam_Nome];
+  char Nome[Tam_Nome];
   char Sexo;
   int Cpf;
   int DataNasc[Tam_Data];
@@ -26,15 +36,16 @@ int main(void) {
   int MenuAluno;
   int MenuProfessor;
   int MenuDisciplina;
+  int MenuRelatorio;
+  Aluno ListaDeAlunos[QTD_Alunos];
+  int qtd_alunos_cadastrados=0;
 
   printf("----Bem vindo ao Sistema Escolar----\n\n");
 
   do {
-    printf("Para Continuar aperte '1'\n");
-    printf("Para Sair aperte '0'\n");
-
-    scanf("%d", &TeladeInicio);
-
+    TeladeInicio = TelaInicial();
+    
+ 
     if (TeladeInicio == 0) {
       printf("Programa Finalizado!");
       return 0;
@@ -43,43 +54,108 @@ int main(void) {
     else if (TeladeInicio != 0 && TeladeInicio != 1)
       printf("Comando Desconhecido, por favor escolha uma opção válida:\n\n");
   } while (InicioCont == 0);
+    
+  MenuInicial = MenuPrincipal();
+    
+  switch (MenuInicial) {
+    case 1:
+      MenuAluno = MenudeAlunos();
+      
+      switch (MenuAluno)
+        
+        case 1:
+          printf("Insira o nome do aluno:\n");
+          fgets(ListaDeAlunos[0].Nome,Tam_Nome,stdin);
+          puts(ListaDeAlunos[0].Nome);
+          break;
+      break;
+  
+    case 2:
+      
+      MenuProfessor = MenudeProfessores();
+      break;
+      
+    case 3:
+      
+      MenuDisciplina = MenudeDisciplina();
+      break;
+      
+    case 4:
+      
+      MenuRelatorio = MenuRelatorios();
+    
+    default:
+      
+      printf("Valor Inválido");
+      break;
+    
+  }
+}
 
+//Funções--Menus
+
+int TelaInicial(){
+  int TeladeInicio;
+  
+  printf("Para Continuar aperte '1'\n");
+  printf("Para Sair aperte '0'\n");
+  scanf("%d", &TeladeInicio);
+  
+  return TeladeInicio;
+}
+
+int MenuPrincipal(){
+  int MenuInicial;
+  
   printf("Selecione a opção desejada:\n");
-  printf(
-      "\n* Para selecionar a opção, pressione o valor referente a mesma:\n\n");
-
+  printf("\n* Para selecionar a opção, pressione o valor referente a mesma:\n\n");
   printf("1 - Cadastrar Aluno\n");
   printf("2 - Cadastrar Professor\n");
   printf("3 - Cadastrar Disciplina\n");
   printf("4 - Relatorios\n");
-
   scanf("%d", &MenuInicial);
 
-  switch (MenuInicial) {
-  case 1:
-    printf("\n  1 > Inserir Aluno \n");
-    printf("  2 > Excluir Aluno \n");
-    printf("  3 > Atualizar Cadastro do Aluno \n");
-    scanf("%d", &MenuAluno);
+  return MenuInicial;
+  
+}
 
-    break;
+int MenudeAlunos(){
+  int MenuAluno;
+  printf("\n  1 > Inserir Aluno \n");
+  printf("  2 > Excluir Aluno \n");
+  printf("  3 > Atualizar Cadastro do Aluno \n");
+  scanf("%d", &MenuAluno);
 
-  case 2:
-    printf("\n  1 > Inserir Professor \n");
-    printf("  2 > Excluir Professor \n");
-    printf("  3 > Atualizar Cadastro do Professor \n");
-    scanf("%d", &MenuProfessor);
-    break;
-  case 3:
-    printf("\n  1 > Inserir Disciplina \n");
-    printf("  2 > Excluir Disciplina \n");
-    printf("  3 > Atualizar Cadastro da Disciplina \n");
-    scanf("%d", &MenuDisciplina);
-    break;
-  case 4:
-    printf("\n  1 > Listar Alunos \n");
-    printf("  2 > Listar Professores \n");
-    printf("  3 > Listar Disciplinas (dados da disciplina sem os alunos) \n");
-  case default:
-  }
+  return MenuAluno;
+}
+
+int MenudeProfessores(){
+  int MenuProfessor;
+  
+  printf("\n  1 > Inserir Professor \n");
+  printf("  2 > Excluir Professor \n");
+  printf("  3 > Atualizar Cadastro do Professor \n");
+  scanf("%d", &MenuProfessor);
+
+  return MenuProfessor;
+}
+
+int MenudeDisciplina(){
+  int MenuDisciplina;
+  printf("\n  1 > Inserir Disciplina \n");
+  printf("  2 > Excluir Disciplina \n");
+  printf("  3 > Atualizar Cadastro da Disciplina \n");
+  scanf("%d", &MenuDisciplina);
+
+  return MenuDisciplina;
+}
+
+int MenuRelatorios(){
+  int MenuRelatorio;
+  printf("\n  1 > Listar Alunos \n");
+  printf("  2 > Listar Professores \n");
+  printf("  3 > Listar Disciplinas (dados da disciplina sem os alunos) \n");
+  scanf("%d", &MenuRelatorio);
+
+  return MenuRelatorio;
 }
