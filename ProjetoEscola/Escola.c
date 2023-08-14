@@ -65,8 +65,15 @@ int main(void) {
         
         case 1:
           printf("Insira o nome do aluno:\n");
-          fgets(ListaDeAlunos[0].Nome,Tam_Nome,stdin);
-          puts(ListaDeAlunos[0].Nome);
+          fgets(ListaDeAlunos[qtd_alunos_cadastrados].Nome,Tam_Nome,stdin);
+          printf("Insira a Matrícula\n");
+          scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
+          printf("Insira o sexo do aluno: M/F");
+          scanf("%c", &ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
+          printf("Insira o cpf do aluno:\n**apenas números**");
+          scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
+          printf("Insira a data de nascimento do aluno:");
+          
           break;
       break;
   
@@ -155,6 +162,7 @@ int MenuRelatorios(){
   printf("\n  1 > Listar Alunos \n");
   printf("  2 > Listar Professores \n");
   printf("  3 > Listar Disciplinas (dados da disciplina sem os alunos) \n");
+  
   scanf("%d", &MenuRelatorio);
 
   return MenuRelatorio;
