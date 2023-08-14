@@ -68,11 +68,11 @@ int main(void) {
           fgets(ListaDeAlunos[qtd_alunos_cadastrados].Nome,Tam_Nome,stdin);
           printf("Insira a Matrícula\n");
           scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
-          printf("Insira o sexo do aluno: M/F");
-          scanf("%c", &ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
-          printf("Insira o cpf do aluno:\n**apenas números**");
+          printf("Insira o sexo do aluno: M/F\n");
+          scanf(" %c", &ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
+          printf("Insira o cpf do aluno:\n**apenas números**\n");
           scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
-          printf("Insira a data de nascimento do aluno:");
+          printf("Insira a data de nascimento do aluno:\n");
           
           break;
       break;
