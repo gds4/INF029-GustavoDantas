@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 #define Tam_Nome 101
-#define Tam_Data 11
+#define Tam_Data 12
 #define QTD_Alunos 5
 
 int TelaInicial();
@@ -18,7 +17,7 @@ typedef struct {
   char Nome[Tam_Nome];
   char Sexo;
   int Cpf;
-  int DataNasc[Tam_Data];
+  char DataNasc[Tam_Data];
 } Aluno;
 
 typedef struct {
@@ -39,6 +38,7 @@ int main(void) {
   int MenuRelatorio;
   Aluno ListaDeAlunos[QTD_Alunos];
   int qtd_alunos_cadastrados=0;
+  char stringteste[50];
 
   printf("----Bem vindo ao Sistema Escolar----\n\n");
 
@@ -65,15 +65,17 @@ int main(void) {
         
         case 1:
           printf("Insira o nome do aluno:\n");
-          fgets(ListaDeAlunos[qtd_alunos_cadastrados].Nome,Tam_Nome,stdin);
+          fgets(ListaDeAlunos[qtd_alunos_cadastrados].Nome, Tam_Nome, stdin);
+          puts(ListaDeAlunos[0].Nome);
           printf("Insira a Matrícula\n");
           scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
           printf("Insira o sexo do aluno: M/F\n");
           scanf(" %c", &ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
           printf("Insira o cpf do aluno:\n**apenas números**\n");
           scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
+          getchar();
           printf("Insira a data de nascimento do aluno:\n");
-          
+          fgets(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc, Tam_Data, stdin);
           break;
       break;
   
@@ -132,7 +134,7 @@ int MenudeAlunos(){
   printf("  2 > Excluir Aluno \n");
   printf("  3 > Atualizar Cadastro do Aluno \n");
   scanf("%d", &MenuAluno);
-
+  getchar();
   return MenuAluno;
 }
 
