@@ -183,7 +183,7 @@ int main(void) {
           switch (MenuRelatorio)
             case 1:
               for(icont=0;icont<qtd_alunos_cadastrados;icont++){
-                printf("%d  %s %c %s %s\n" , ListaDeAlunos[icont].Matricula,  ListaDeAlunos[icont].Nome, ListaDeAlunos[icont].Sexo, ListaDeAlunos[icont].DataNasc, ListaDeAlunos[icont].Cpf);
+                printf("%d  %s %c %s %s\n" , ListaDeAlunos[icont].Matricula, ListaDeAlunos[icont].Nome, ListaDeAlunos[icont].Sexo, ListaDeAlunos[icont].DataNasc, ListaDeAlunos[icont].Cpf);
               }
           break;
         }
