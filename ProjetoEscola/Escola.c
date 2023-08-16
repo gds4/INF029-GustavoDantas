@@ -78,9 +78,10 @@ int main(void) {
       MenuInicial = MenuPrincipal();
         
       switch (MenuInicial) {
-        case 0:
+        case 0:{
           MenuInicial=0;
           break;
+        }
         case 1:{
           MenuAluno = MenudeAlunos();
           
