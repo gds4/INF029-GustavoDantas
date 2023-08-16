@@ -101,7 +101,7 @@ int main(void) {
               fgets(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc, Tam_Data, stdin);
               getchar();
               delbar0(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc);
-              printf("Insira o cpf do aluno:\n**apenas números**\n");
+              printf("Insira o cpf do aluno:\n");
               fgets(ListaDeAlunos[qtd_alunos_cadastrados].Cpf,Tam_Cpf,stdin);
               delbar0(ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
               qtd_alunos_cadastrados++;
@@ -144,10 +144,10 @@ int main(void) {
               printf("Insira o sexo do Professor: M/F\n");
               scanf(" %c", &ListaDeProfessor[qtd_prof_cadastrado].Sexo);
               getchar();
-              printf("Insira a data de nascimento do aluno:\n");
+              printf("Insira a data de nascimento do Professor:\n");
               fgets(ListaDeProfessor[qtd_prof_cadastrado].DataNasc, Tam_Data, stdin);
               delbar0(ListaDeProfessor[qtd_prof_cadastrado].DataNasc);            
-              printf("Insira o cpf do aluno:\n**apenas números**\n");
+              printf("Insira o cpf do Professor:\n");
               fgets(ListaDeProfessor[qtd_prof_cadastrado].Cpf,Tam_Cpf,stdin);
               delbar0(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
               qtd_prof_cadastrado++;
