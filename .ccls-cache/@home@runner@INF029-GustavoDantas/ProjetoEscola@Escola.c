@@ -17,7 +17,7 @@ int MenudeProfessores();
 int MenudeDisciplina();
 int MenuRelatorios();
 void InserirAluno();
-void delbar0(char string[]);
+void delbar0(char string[]);4
 
 typedef struct {
   int Matricula;
@@ -59,6 +59,7 @@ int main(void) {
   int qtd_disc_cadastrado=0;
   char stringteste[50];
   int matricula;
+  int matriculaprof;
   int icont=0;
   int jcont=0;
 
@@ -130,10 +131,11 @@ int main(void) {
               
           break;
           }  
+        
         case 2:{
           
           MenuProfessor = MenudeProfessores();
-          switch (MenuProfessor)
+          switch (MenuProfessor){
             case 1:{
               printf("Insira a Matrícula\n");
               scanf("%d", &ListaDeProfessor[qtd_prof_cadastrado].Matricula);
@@ -153,6 +155,26 @@ int main(void) {
               qtd_prof_cadastrado++;
               break;
             }
+            case 2:{
+              printf("Insira a Matrícula do Professor");
+              scanf("%d",&matriculaprof);
+              for(icont=0;icont<qtd_prof_cadastrado+1;icont++){
+                if(ListaDeProfessor[icont].Matricula==matriculaprof){
+                  for(jcont=icont+1;jcont<qtd_prof_cadastrado;jcont++){
+                    ListaDeProfessor[jcont-1].Matricula=ListaDeProfessor[jcont].Matricula;
+                    strcpy(ListaDeProfessor[jcont-1].Cpf,ListaDeProfessor[jcont].Cpf);
+                    strcpy(ListaDeProfessor[jcont-1].Nome,ListaDeProfessor[jcont].Nome);
+                    ListaDeProfessor[jcont-1].Sexo=ListaDeProfessor[jcont].Sexo;
+                    strcpy(ListaDeProfessor[jcont-1].DataNasc,ListaDeProfessor[jcont].DataNasc);
+                    
+                  }
+                }
+              }
+              qtd_prof_cadastrado--;
+              break;
+            }
+          
+          }
           break;
         }
           
@@ -290,25 +312,3 @@ void delbar0(char string[]){
     if(string[dbcont]=='\n')
       string[dbcont]='\0';
 }
-
-//Funções -- Aluno 
-
-/*void InserirAluno(){
-
-  printf("Insira a Matrícula\n");
-  scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
-  getchar();
-  printf("Insira o nome do aluno:\n");
-  fgets(ListaDeAlunos[qtd_alunos_cadastrados].Nome, Tam_Nome, stdin);
-  printf("Insira o sexo do aluno: M/F\n");
-  scanf(" %c", &ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
-  getchar();
-  printf("Insira a data de nascimento do aluno:\n");
-  fgets(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc, Tam_Data, stdin);
-  printf("Insira o cpf do aluno:\n**apenas números**\n");
-  scanf("%d", &ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
-
-}*/
-
-
-
