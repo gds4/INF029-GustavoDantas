@@ -17,7 +17,7 @@ int MenudeProfessores();
 int MenudeDisciplina();
 int MenuRelatorios();
 void InserirAluno();
-void delbar0(char string[]);4
+void delbar0(char string[]);
 
 typedef struct {
   int Matricula;
@@ -25,7 +25,7 @@ typedef struct {
   char Sexo;
   char Cpf[Tam_Cpf];
   char DataNasc[Tam_Data];
-} Aluno;
+}Aluno;
 
 typedef struct {
   int Matricula;
