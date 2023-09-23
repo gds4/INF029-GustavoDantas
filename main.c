@@ -1,7 +1,7 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #define QNTD 10
 
-int main(void) 
+int main123(void) 
 {
   int icont;
   int kcont;
@@ -20,4 +20,8 @@ int main(void)
   for(kcont=0;kcont<QNTD;kcont++)
     if(idade[kcont]>media)
       printf("%d ", idade[kcont]);
-}*/
+}
+
+/*cd nomedapasta
+gcc corretor.c GustavoSilva-20231160050.c -o t1
+./t1*/

@@ -43,7 +43,7 @@ typedef struct{
   
 }Disciplina;
 
-int main(void) {
+int main123dfs(void) {
   int TeladeInicio;
   int InicioCont = 8;
   int MenuInicial=8;

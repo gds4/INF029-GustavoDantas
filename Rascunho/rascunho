@@ -1,0 +1,42 @@
+/*if (Tam_Valido == 1) {
+    for (jcont = 0; data[jcont]!= '/'; jcont++){
+      sDia[jcont] = data[jcont];}
+    sDia[jcont] = '\0';
+    if(Tam_String(sDia)==2 || Tam_String(sDia)==1)
+      Data.iDia = atoi(sDia);
+
+    for (kcont = jcont+1; data[kcont] != '/'; kcont++){
+      sMes[kcont-(jcont+1)] = data[kcont];}
+    sMes[kcont-(jcont+1)] = '\0';
+    if(Tam_String(sMes)==2 || Tam_String(sMes)==1)
+      Data.iMes = atoi(sMes);
+  
+    for (lcont= kcont+1; data[lcont] != '\0'; lcont++){
+      sAno[lcont-(kcont+1)] = data[lcont];}
+    sAno[lcont-(kcont+1)] = '\0';
+    if(Tam_String(sDia)==2 || Tam_String(sDia)==4)
+      Data.iAno = atoi(sAno);*/
+
+
+
+
+
+/*
+  //Conta a quantidade de anos bissexto do ano inicial ao ano final, sem considerar a data de inicio/final
+  
+  for(icont = data_inicial.iAno; icont <= data_final.iAno; icont++){
+    if(VerificarAnoBissexto(icont) == 1){
+        qtd_ano_bis++;
+    }
+  }
+
+  //Remove a quantidade de anos bissextos a depender de quando do ano começa a contar
+  if(VerificarAnoBissexto(data_inicial.iAno) == 1 && data_inicial.iMes > 2){
+    qtd_ano_bis--;
+  }
+  //Remove a quantidade de anos bissextos a depender te até quando no ano termina de contar
+  if(VerificarAnoBissexto(data_final.iAno) == 1 && data_final.iMes <= 2 && data_final.iDia < 29){
+    qtd_ano_bis--;
+  }
+
+  qtd_dias += qtd_ano_bis;  //ultima linha de atribuição à variavel que conta a quantidade de dias*/
