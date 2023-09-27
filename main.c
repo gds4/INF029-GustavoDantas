@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define QNTD 10
 
-int main123(void) 
+int main(void) 
 {
   int icont;
   int kcont;
@@ -22,6 +22,3 @@ int main123(void)
       printf("%d ", idade[kcont]);
 }
 
-/*cd nomedapasta
-gcc corretor.c GustavoSilva-20231160050.c -o t1
-./t1*/

@@ -353,7 +353,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]){
   
   for(icont = ctrl_mes; qtd_dias_aux >= array[icont]; icont++){
     
-    if(VerificarAnoBissexto(ano_atual)==1){
+    if(VerificarAnoBissexto(ano_atual) == 1){
       array[1] = 29;
     }else {
       array[1] = 28;
@@ -362,17 +362,15 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]){
     qtd_dias_aux -= array[icont];
     dma.qtdMeses++;
     
-    if(icont==11){
+    if(icont == 11){
       ano_atual++;
       icont = -1;//o valor é -1 porque será incrementado no final do loop para 0
     }
     
-    if(dma.qtdMeses==12){
+    if(dma.qtdMeses == 12){
       dma.qtdAnos++;
       dma.qtdMeses = 0;
     }
-
-    
   }
   
   dma.qtdDias = qtd_dias_aux;
@@ -398,8 +396,8 @@ int q3(char *texto, char c, int isCaseSensitive)
     
   int qtdOcorrencias = 0;
   int icont;
-  if(isCaseSensitive==1){
-    for(icont=0;texto[icont]!= '\0';icont++){
+  if(isCaseSensitive == 1){
+    for(icont = 0; texto[icont] != '\0'; icont++){
       if(texto[icont] == c){
         qtdOcorrencias++;
       }
@@ -407,7 +405,7 @@ int q3(char *texto, char c, int isCaseSensitive)
   }else{
       
     if(c >= 'A' && c <= 'Z'){
-      for(icont=0;texto[icont]!= '\0';icont++){
+      for(icont = 0; texto[icont] != '\0'; icont++){
         if(texto[icont] >= 'a' && texto[icont] <= 'z'){
           if(texto[icont]-32 == c){
             qtdOcorrencias++;
@@ -419,7 +417,7 @@ int q3(char *texto, char c, int isCaseSensitive)
         }
       }
     }else if(c >= 'a' && c <= 'z'){
-      for(icont=0;texto[icont]!= '\0';icont++){
+      for(icont = 0; texto[icont] != '\0'; icont++){
         if(texto[icont] >= 'A' && texto[icont] <= 'Z'){
           if(texto[icont]+32 == c){
             qtdOcorrencias++;
@@ -436,7 +434,6 @@ int q3(char *texto, char c, int isCaseSensitive)
       }
     }
   }
-        
   return qtdOcorrencias;
 }
 
@@ -459,33 +456,30 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30]){
   int qtdOcorrencias = 0;
   int hcont, icont,jcont,kcont;
-  int p1,p2;
+  int p1,p2=0;
   int ctrl;
   hcont=0;
-  //"Laboratorio de programacao: para ratos de programação"   rato
+  //"Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas"   mui
   
   for(icont=0; strTexto[icont] != '\0'; icont++){
     jcont=0;
     ctrl = 0;
     if(strTexto[icont] == strBusca[jcont]){
       p1 = icont+1;
-      for(jcont=0, kcont = icont; strBusca[jcont] != '\0' && strTexto[kcont] != '\0';jcont++,kcont++){
+      for(jcont=0, kcont = icont; strBusca[jcont] != '\0' && strTexto[kcont] != '\0'; jcont++, kcont++){
         if(strTexto[kcont] == strBusca[jcont]){
           ctrl++;
         }
       }
       if(ctrl == Tam_String(strBusca)){
         p2 = kcont;
+        posicoes[hcont] = p1;
+        posicoes[hcont+1] = p2;
+        hcont+=2;
+        qtdOcorrencias++;
       }
-      printf("\np1 e p2 %d - %d\n",p1,p2);
-      posicoes[hcont] = p1;
-      posicoes[hcont+1] = p2;
-      hcont+=2;
-      qtdOcorrencias++;
     }
-    
   }
-
   return qtdOcorrencias;
 }
 
@@ -519,7 +513,6 @@ int q5(int num)
     }
   }
     num=num2;
-  
     return num;
 }
 
@@ -532,11 +525,45 @@ int q5(int num)
  @saida
     Quantidade de vezes que número de busca ocorre em número base
  */
-
+//{2345} 34
 int q6(int numerobase, int numerobusca)
-{
-    int qtdOcorrencias;
+{   
+  int base = numerobase;
+  int busca = numerobusca;
+  int resto_base;
+  int resto_busca;
+  int tam_cont=0;
+  int validacao = 0;
+  
+  int qtdOcorrencias = 0;
 
+  //divide o numero base por 10 pegando o resto e vai comparando com o numerobusca de traz pra frente
+    while (base!=0){
+      resto_base = base % 10;
+      resto_busca = busca % 10;
+
+      if(resto_base==resto_busca){
+        tam_cont++;
+        busca /= 10;
+        validacao=1;
+      }else {
+        validacao=0;
+      }
+      
+      if(Verificar_Tam_de_Int(numerobusca)==tam_cont && validacao==1){
+        qtdOcorrencias++;
+        tam_cont = 0;
+      }else if(validacao==0 && Verificar_Tam_de_Int(busca)!=Verificar_Tam_de_Int(numerobusca)){
+        busca = numerobusca;
+        tam_cont = 0;
+      }else if (busca==0){
+        busca=numerobusca;
+      }
+      
+      base /= 10;
+    }
+    
+    //dividir numero base por 10 pegando o resto e ir comparando com o numerobusca de traz pra frente
   
     return qtdOcorrencias;
 }

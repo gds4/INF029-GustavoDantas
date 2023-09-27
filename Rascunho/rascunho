@@ -1,3 +1,14 @@
+
+/*cd GustavoSilva-20231160050-T1
+gcc corretor.c GustavoSilva-20231160050.c -o t1
+./t1*/
+
+
+
+
+
+
+
 /*if (Tam_Valido == 1) {
     for (jcont = 0; data[jcont]!= '/'; jcont++){
       sDia[jcont] = data[jcont];}
