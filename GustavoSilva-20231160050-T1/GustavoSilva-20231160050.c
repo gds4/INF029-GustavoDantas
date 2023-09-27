@@ -152,6 +152,9 @@ int Tam_String(char string[]){
 int Verificar_Tam_de_Int(int num){
   int num_aux;
   int tam_int = 0;
+  if(num == 0){
+    return 1;
+  }
   for(num_aux = num; num_aux != 0; num_aux/=10){
     tam_int++;
   }
@@ -498,7 +501,7 @@ int q5(int num)
   int inicio = 0;
   int multi = 1;
   int num2 = 0;
-  int num_aux = num;//1798    380
+  int num_aux = num;
   
   while(num_aux>0){
     if(num2!=0 && inicio==1){
@@ -556,14 +559,13 @@ int q6(int numerobase, int numerobusca)
       }else if(validacao==0 && Verificar_Tam_de_Int(busca)!=Verificar_Tam_de_Int(numerobusca)){
         busca = numerobusca;
         tam_cont = 0;
-      }else if (busca==0){
+      }else if (busca==0 && numerobusca != 0){
         busca=numerobusca;
       }
       
       base /= 10;
     }
     
-    //dividir numero base por 10 pegando o resto e ir comparando com o numerobusca de traz pra frente
   
     return qtdOcorrencias;
 }
