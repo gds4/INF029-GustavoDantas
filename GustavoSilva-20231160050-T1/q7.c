@@ -10,14 +10,109 @@ char X_O(int num){
   else return ' ';
 }
 
-void Print_JDV(int jogo_da_velha[3][3]){
-  printf("\n      1   2   3\n");
-  printf("A -  %c | %c | %c\n", X_O(jogo_da_velha[0][0]), X_O(jogo_da_velha[0][1]), X_O(jogo_da_velha[0][2]));
-  printf("    ---#---#---\n");
-  printf("B -  %c | %c | %c\n", X_O(jogo_da_velha[1][0]), X_O(jogo_da_velha[1][1]), X_O(jogo_da_velha[1][2]));
-  printf("    ---#---#---\n");
-  printf("C -  %c | %c | %c\n", X_O(jogo_da_velha[2][0]), X_O(jogo_da_velha[2][1]), X_O(jogo_da_velha[2][2]));
+void Linha_superior(char p1,char p2,char p3){
+  if(p1 == 'X'){
+    printf(" \\ / ");
+  }else if (p1 == 'O'){
+    printf(" === ");
+  }else{
+    printf("     ");
+  }
+  
+  printf(" | ");
 
+  if(p2 == 'X'){
+    printf(" \\ / ");
+  }else if (p2 == 'O'){
+    printf(" === ");
+  }else{
+    printf("     ");
+  }
+  printf(" | ");
+
+  if(p3 == 'X'){
+    printf(" \\ / \n");
+  }else if (p3 == 'O'){
+    printf(" === \n");
+  }else{
+    printf("     \n");
+  }
+}
+
+void Linha_central(char p1,char p2,char p3){
+  if(p1 == 'X'){
+    printf("  X  ");
+  }else if (p1 == 'O'){
+    printf("|   |");
+  }else{
+    printf("     ");
+  }
+  
+  printf(" | ");
+
+  if(p2 == 'X'){
+    printf("  X  ");
+  }else if (p2 == 'O'){
+    printf("|   |");
+  }else{
+    printf("     ");
+  }
+  printf(" | ");
+
+  if(p3 == 'X'){
+    printf("  X  \n");
+  }else if (p3 == 'O'){
+    printf("|   |\n");
+  }else{
+    printf("     \n");
+  }
+}
+
+void Linha_inferior(char p1,char p2,char p3){
+  if(p1 == 'X'){
+    printf(" / \\ ");
+  }else if (p1 == 'O'){
+    printf(" === ");
+  }else{
+    printf("     ");
+  }
+  
+  printf(" | ");
+
+  if(p2 == 'X'){
+    printf(" / \\ ");
+  }else if (p2 == 'O'){
+    printf(" === ");
+  }else{
+    printf("     ");
+  }
+  printf(" | ");
+
+  if(p3 == 'X'){
+    printf(" / \\ \n");
+  }else if (p3 == 'O'){
+    printf(" === \n");
+  }else{
+    printf("     \n");
+  }
+}
+
+void Print_JDV(int jogo_da_velha[3][3]){
+  char p1, p2, p3;
+  printf("\n");
+  for(int icont = 0; icont < 3; icont++){
+    p1 = X_O(jogo_da_velha[icont][0]);
+    p2 = X_O(jogo_da_velha[icont][1]);
+    p3 = X_O(jogo_da_velha[icont][2]);
+
+    Linha_superior(p1, p2, p3);
+    Linha_central(p1, p2, p3);
+    Linha_inferior(p1, p2, p3);
+    if(icont<2){
+      printf("------#-------#------\n");
+      
+    }
+  }
 }
 
 void del_bar_N(char string[]){
@@ -82,9 +177,9 @@ int main(){
   while(!fim_de_jogo && !velha){
     num_de_jogadas++;
     if(jogador_da_vez == 1){
-      printf("%s", "Jogador 1, informe a sua jogada: " );
+      printf("\nJogador 1, informe a sua jogada: " );
     }else if (jogador_da_vez == 2)
-      printf("%s", "Jogador 2, informe a sua jogada: " );
+      printf("Jogador 2, informe a sua jogada: " );
 
     //Mantém o jogador no loop até ele fornecer uma jogada válida.
     sair = 0;
@@ -99,12 +194,10 @@ int main(){
         Coluna = jogada[1] - 49;
         if(Validar_posicao(Linha, Coluna, jogo_da_velha)==1){
           sair = 1;
-        }else printf("\n%s", "Jogada inválida, tente novamente: ");
-      }else printf("\n%s", "Jogada inválida, tente novamente: ");
+        }else printf("\nJogada inválida, tente novamente: ");
+      }else printf("\nJogada inválida, tente novamente: ");
     }
 
-    
-  
     //Atribui o valor na matriz(posição no jogo da velha) equivalente ao jogador da vez
   
     if(jogador_da_vez == 1){
@@ -125,10 +218,10 @@ int main(){
       }
     
       if(somat == 3 || somat_2 ==3){
-        printf("%s", "Fim de Jogo! O jogador 1 é o vencedor!!");
+        printf("Fim de Jogo! O jogador 1 é o vencedor!!");
         fim_de_jogo = 1;
       }else if (somat == 30 || somat == 30){
-        printf("%s", "Fim de Jogo! O jogador 2 é o vencedor!!");
+        printf("Fim de Jogo! O jogador 2 é o vencedor!!");
         fim_de_jogo = 1;
         
       }
@@ -141,10 +234,10 @@ int main(){
       somat += jogo_da_velha[icont][icont];
       somat_2 += jogo_da_velha[jcont][icont];
       if(somat == 3 || somat_2 == 3){
-        printf("\n%s", "Fim de Jogo! O jogador 1 é o vencedor!!");
+        printf("\nFim de Jogo! O jogador 1 é o vencedor!!");
         fim_de_jogo = 1;
       }else if (somat == 30 || somat_2 == 30){
-        printf("\n%s", "Fim de Jogo! O jogador 2 é o vencedor!!");
+        printf("\nFim de Jogo! O jogador 2 é o vencedor!!");
         fim_de_jogo = 1;
       }
     }
@@ -152,17 +245,14 @@ int main(){
     //Verifica se o Jogo empatou.
   
     if(num_de_jogadas == 9 && fim_de_jogo == 0){
-      printf("\n%s", "Deu Velha!!");
+      printf("\nDeu Velha!!");
       velha = 1;
     }
 
-     
     if(jogador_da_vez == 1){
       jogador_da_vez = 2;
     }else {
       jogador_da_vez = 1;
     }
-
   }
-  
 }
