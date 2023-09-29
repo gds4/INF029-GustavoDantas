@@ -172,6 +172,14 @@ int Data_padrao_CMP(int dia, int mes, int ano){
   return data_padrao;
   
 }
+
+char X_O(int num){
+  if(num == 1)
+    return 'X';
+  else if (num ==10)
+    return 'O';
+  else return ' ';
+}
   
 /*
  Q1 = validar data
@@ -461,27 +469,49 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
   int hcont, icont,jcont,kcont;
   int p1,p2=0;
   int ctrl;
+  int char_espec = 0;
+  int char_busca = 0;
+
   hcont=0;
-  //"Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas"   mui
+
+  
+  for(int lcont=0;strBusca[lcont]!= '\0';lcont++){
+    if(strBusca[lcont] == -61){
+      char_busca++;
+    }
+  }
   
   for(icont=0; strTexto[icont] != '\0'; icont++){
     jcont=0;
     ctrl = 0;
     if(strTexto[icont] == strBusca[jcont]){
-      p1 = icont+1;
+      p1 = icont+1-char_espec;
+      
+    
       for(jcont=0, kcont = icont; strBusca[jcont] != '\0' && strTexto[kcont] != '\0'; jcont++, kcont++){
+        if(strTexto[kcont]== -61){
+          char_espec++;
+        }
         if(strTexto[kcont] == strBusca[jcont]){
           ctrl++;
+        }else {
+          break;
         }
       }
+      
       if(ctrl == Tam_String(strBusca)){
-        p2 = kcont;
+        p2 = kcont - char_espec;
         posicoes[hcont] = p1;
         posicoes[hcont+1] = p2;
         hcont+=2;
         qtdOcorrencias++;
       }
+      
+      icont += kcont - icont;
     }
+    if(strTexto[icont]== -61){
+        char_espec++;
+      }
   }
   return qtdOcorrencias;
 }
@@ -553,13 +583,13 @@ int q6(int numerobase, int numerobusca)
         validacao=0;
       }
       
-      if(Verificar_Tam_de_Int(numerobusca)==tam_cont && validacao==1){
+      if(Verificar_Tam_de_Int(numerobusca) == tam_cont && validacao==1){
         qtdOcorrencias++;
         tam_cont = 0;
-      }else if(validacao==0 && Verificar_Tam_de_Int(busca)!=Verificar_Tam_de_Int(numerobusca)){
+      }else if(validacao == 0 && Verificar_Tam_de_Int(busca) != Verificar_Tam_de_Int(numerobusca)){
         busca = numerobusca;
         tam_cont = 0;
-      }else if (busca==0 && numerobusca != 0){
+      }else if (busca == 0 && numerobusca != 0){
         busca=numerobusca;
       }
       
