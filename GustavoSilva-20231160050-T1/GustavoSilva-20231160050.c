@@ -485,7 +485,7 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
     jcont=0;
     ctrl = 0;
     if(strTexto[icont] == strBusca[jcont]){
-      p1 = icont+1-char_espec;
+      p1 = icont+1-char_espec; 
       
     
       for(jcont=0, kcont = icont; strBusca[jcont] != '\0' && strTexto[kcont] != '\0'; jcont++, kcont++){

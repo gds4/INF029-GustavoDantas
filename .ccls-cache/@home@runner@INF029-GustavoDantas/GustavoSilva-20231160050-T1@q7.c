@@ -100,16 +100,19 @@ void Linha_inferior(char p1,char p2,char p3){
 void Print_JDV(int jogo_da_velha[3][3]){
   char p1, p2, p3;
   printf("\n");
+  printf("       1       2       3\n");
   for(int icont = 0; icont < 3; icont++){
     p1 = X_O(jogo_da_velha[icont][0]);
     p2 = X_O(jogo_da_velha[icont][1]);
     p3 = X_O(jogo_da_velha[icont][2]);
-
+    printf("     ");
     Linha_superior(p1, p2, p3);
+    printf("%c -  ",65+icont);
     Linha_central(p1, p2, p3);
+    printf("     ");
     Linha_inferior(p1, p2, p3);
     if(icont<2){
-      printf("------#-------#------\n");
+      printf("     ------#-------#------\n");
       
     }
   }
@@ -173,13 +176,16 @@ int main(){
   int icont, jcont;
   int Linha;
   int Coluna;
-  
+
+  Print_JDV(jogo_da_velha);
+  //1 - Criar as telas de inicio
   while(!fim_de_jogo && !velha){
     num_de_jogadas++;
+    
     if(jogador_da_vez == 1){
       printf("\nJogador 1, informe a sua jogada: " );
     }else if (jogador_da_vez == 2)
-      printf("Jogador 2, informe a sua jogada: " );
+      printf("\nJogador 2, informe a sua jogada: " );
 
     //Mantém o jogador no loop até ele fornecer uma jogada válida.
     sair = 0;
