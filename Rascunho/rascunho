@@ -1,6 +1,6 @@
 
 cd GustavoSilva-20231160050-T1
-gcc corretor.c GustavoSilva-20231160050.c -o t1
+gcc novocorretor.c GustavoSilva-20231160050.c -o t1
 ./t1
 
 

@@ -173,13 +173,6 @@ int Data_padrao_CMP(int dia, int mes, int ano){
   
 }
 
-char X_O(int num){
-  if(num == 1)
-    return 'X';
-  else if (num ==10)
-    return 'O';
-  else return ' ';
-}
   
 /*
  Q1 = validar data
