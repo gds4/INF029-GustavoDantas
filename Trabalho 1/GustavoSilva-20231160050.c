@@ -468,12 +468,6 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
   hcont=0;
 
   
-  for(int lcont=0;strBusca[lcont]!= '\0';lcont++){
-    if(strBusca[lcont] == -61){
-      char_busca++;
-    }
-  }
-  
   for(icont=0; strTexto[icont] != '\0'; icont++){
     jcont=0;
     ctrl = 0;
@@ -499,12 +493,12 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]){
         hcont+=2;
         qtdOcorrencias++;
       }
-      
-      icont += kcont - icont;
+     
+      icont += kcont - icont -1;
     }
     if(strTexto[icont]== -61){
         char_espec++;
-      }
+    }
   }
   return qtdOcorrencias;
 }
@@ -579,16 +573,15 @@ int q6(int numerobase, int numerobusca)
       if(Verificar_Tam_de_Int(numerobusca) == tam_cont && validacao==1){
         qtdOcorrencias++;
         tam_cont = 0;
-      }else if(validacao == 0 && Verificar_Tam_de_Int(busca) != Verificar_Tam_de_Int(numerobusca)){
+      }else if(validacao == 0){
         busca = numerobusca;
         tam_cont = 0;
-      }else if (busca == 0 && numerobusca != 0){
+      }
+      if (busca == 0 && numerobusca != 0){
         busca=numerobusca;
       }
       
       base /= 10;
     }
-    
-  
     return qtdOcorrencias;
 }

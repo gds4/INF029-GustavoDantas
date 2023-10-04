@@ -31,14 +31,18 @@ void testQ6();
 
 int main()
 {
-     testSomar();
-     testFatorial();
+     //testSomar();
+    // testFatorial();
      testQ1();
-     testQ2();
-     testQ3();
-     testQ4();
-     testQ5();
-     testQ6();
+    // testQ2();
+     //testQ3();
+    // testQ4();
+    // testQ5();
+    // testQ6();
+
+  /*cd GustavoSilva-20231160050-T1
+gcc novocorretor.c GustavoSilva-20231160050.c -o t1
+./t1*/
 }
 
 void testSomar()

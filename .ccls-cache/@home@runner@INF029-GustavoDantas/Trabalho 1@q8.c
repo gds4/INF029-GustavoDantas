@@ -492,9 +492,9 @@ int main(){
   int menu;
   for(int icont = 0; icont<2; icont++){
     int matriz[12][12] = {{0}};
-    navio_1.Qtd = 0;
-    navio_2.Qtd = 0;
-    navio_3.Qtd = 0;
+    navio_1.Qtd = 4;
+    navio_2.Qtd = 3;
+    navio_3.Qtd = 2;
     navio_4.Qtd = 1;
   
     navio_1.Tam = 1;
