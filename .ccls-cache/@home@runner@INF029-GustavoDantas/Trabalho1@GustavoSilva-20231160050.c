@@ -133,6 +133,47 @@ DataQuebrada quebraData(char data[]){
     
   return dq;
 }
+
+int VerificarAnoBissexto(int ano){
+   
+  if (ano % 4 == 0 && (ano % 400 == 0 || ano % 100 != 0)) 
+    return 1;
+  else return 0;
+}
+
+int Tam_String(char string[]){
+  int comprimento=0;
+  for(int icont = 0;string[icont] != '\0';icont++){
+    comprimento++;
+  }
+  return comprimento;
+}
+
+int Verificar_Tam_de_Int(int num){
+  int num_aux;
+  int tam_int = 0;
+  if(num == 0){
+    return 1;
+  }
+  for(num_aux = num; num_aux != 0; num_aux/=10){
+    tam_int++;
+  }
+  return tam_int;
+}
+
+//função que armazena a data em um inteiro no formato AAAAMMDD para fins de comparação
+int Data_padrao_CMP(int dia, int mes, int ano){
+  int data_padrao;
+
+  data_padrao = ano;
+  data_padrao = (data_padrao*100) + mes;
+  data_padrao = (data_padrao* 100) + dia;
+
+  return data_padrao;
+  
+}
+
+  
 /*
  Q1 = validar data
 @objetivo
@@ -148,11 +189,56 @@ DataQuebrada quebraData(char data[]){
  */
 int q1(char data[])
 {
-  int datavalida = 1;
-
+  char sDia[3];
+  char sMes[3];
+  char sAno[5];
+  int icont,jcont,kcont,lcont;
+  int Tam_Valido=0;
+  DataQuebrada Data;
+  int validacao = 0;
+  int datavalida = 0;
+  
+  if(Tam_String(data) >= 6 && Tam_String(data) <= 10){
+    Tam_Valido = 1;
+    Data = quebraData(data);
+  }
+    
   //quebrar a string data em strings sDia, sMes, sAno
 
+    
   //DataQuebrada dataQuebrada = quebraData(data);
+
+  if(Data.valido == 1){
+    if (Data.iMes == 4 || Data.iMes == 6 || Data.iMes == 9 ||
+          Data.iMes == 11){
+        if (Data.iDia >= 1 && Data.iDia <= 30){
+          datavalida = 1;
+        }
+    }
+    if (Data.iMes == 1 || Data.iMes == 3 || Data.iMes == 5 ||
+        Data.iMes == 7 || Data.iMes == 8 || Data.iMes == 10 ||
+        Data.iMes == 12){
+      if (Data.iDia >= 1 && Data.iDia <= 31){
+        datavalida = 1;
+      }
+    }
+    if (Data.iMes == 2){
+      if(VerificarAnoBissexto(Data.iAno)==1){
+        if (Data.iDia >= 1 && Data.iDia <= 29){
+          datavalida = 1;
+        }
+      }else {
+        if (Data.iDia >= 1 && Data.iDia <= 28){
+          datavalida = 1;
+        }
+      }
+    }
+    if(Data.iMes>12 || Data.iMes<1)
+      datavalida = 0;
+  }
+  
+
+    
   //if (dataQuebrada.valido == 0) return 0;
 
   //printf("%s\n", data);
@@ -179,30 +265,124 @@ int q1(char data[])
     4 -> datainicial > datafinal
     Caso o cálculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos com os valores correspondentes.
  */
-DiasMesesAnos q2(char datainicial[], char datafinal[])
-{
+DiasMesesAnos q2(char datainicial[], char datafinal[]){
 
-    //calcule os dados e armazene nas três variáveis a seguir
-    DiasMesesAnos dma;
+  //calcule os dados e armazene nas três variáveis a seguir
+  DiasMesesAnos dma;
+  dma.qtdAnos = 0;
+  dma.qtdDias = 0;
+  dma.qtdMeses = 0;
 
-    if (q1(datainicial) == 0){
-      dma.retorno = 2;
-      return dma;
-    }else if (q1(datafinal) == 0){
-      dma.retorno = 3;
-      return dma;
-    }else{
-      //verifique se a data final não é menor que a data inicial
+  DataQuebrada data_inicial;
+  DataQuebrada data_final;
+
+  if(q1(datainicial) == 1)
+    data_inicial = quebraData(datainicial);
+
+  if(q1(datafinal)==1)
+    data_final = quebraData(datafinal);
+
+  if(Verificar_Tam_de_Int(data_inicial.iAno) == 2){
+    data_inicial.iAno += 2000;
+  }
+  if(Verificar_Tam_de_Int(data_final.iAno) == 2){
+    data_final.iAno += 2000;
+  }
+    
+  if (q1(datainicial) == 0){
+    dma.retorno = 2;
+    return dma;
+  }else if (q1(datafinal) == 0){
+    dma.retorno = 3;
+    return dma;
+  }else if(Data_padrao_CMP(data_final.iDia, data_final.iMes, data_final.iAno) <    
+    Data_padrao_CMP(data_inicial.iDia, data_inicial.iMes, data_inicial.iAno)){
+    dma.retorno = 4;
+    return dma;
+  }
+    //ultimo else if acima verifica se a data final não é menor que a data inicial
+    
+    //calcule a distancia entre as datas
+
+  int array[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  int anoinicial = data_inicial.iAno;
+  int anofinal = data_final.iAno;
+  int ctrl_de_inicio = 0;
+  int icont;
+  int qtd_dias = 0;
+  int qtd_ano_bis = 0;
+
+  //Conta a quantidade de dias totais da data inicial a final
+
+  while(anoinicial <= anofinal){
+    if(VerificarAnoBissexto(anoinicial)==1){
+      array[1] = 29;
+    }else {
+      array[1] = 28;
+    }
+    for(icont = 0; icont < 12;icont++){
+      if(ctrl_de_inicio == 0){
+
+        if(anoinicial == anofinal && data_inicial.iMes == data_final.iMes){
+            qtd_dias = data_final.iDia - data_inicial.iDia;
+            break;
+        }
+        qtd_dias = array[data_inicial.iMes-1] - data_inicial.iDia;
+        icont = data_inicial.iMes;
+        ctrl_de_inicio = 1;
+      }
       
-      //calcule a distancia entre as datas
+      if(anoinicial == anofinal && icont == data_final.iMes-1){
+        qtd_dias += data_final.iDia;
+        break;
+      }else {
+        qtd_dias += array[icont];
+      }
+    }
+    anoinicial++;
+  }
 
+  anoinicial = data_inicial.iAno;
+  anofinal = data_final.iAno;
+  
+  int ano_atual = anoinicial;
+  int qtd_dias_aux;
+  int ctrl_mes = data_inicial.iMes-1;
 
-      //se tudo der certo
-      dma.retorno = 1;
-      return dma;
-      
+  qtd_dias_aux = qtd_dias;
+
+    
+    
+  // após contar os dias vou decrementando a variavel qtd_dias_aux até chegar a zero
+  
+  for(icont = ctrl_mes; qtd_dias_aux >= array[icont]; icont++){
+    
+    if(VerificarAnoBissexto(ano_atual) == 1){
+      array[1] = 29;
+    }else {
+      array[1] = 28;
+    } 
+    
+    qtd_dias_aux -= array[icont];
+    dma.qtdMeses++;
+    
+    if(icont == 11){
+      ano_atual++;
+      icont = -1;//o valor é -1 porque será incrementado no final do loop para 0
     }
     
+    if(dma.qtdMeses == 12){
+      dma.qtdAnos++;
+      dma.qtdMeses = 0;
+    }
+  }
+  
+  dma.qtdDias = qtd_dias_aux;
+    
+  //se tudo der certo
+  dma.retorno = 1;
+  return dma;
+  
 }
 
 /*
@@ -216,11 +396,51 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
     Um número n >= 0.
  */
 int q3(char *texto, char c, int isCaseSensitive)
-{
-    int qtdOcorrencias = -1;
-
-    return qtdOcorrencias;
+{   
+    
+  int qtdOcorrencias = 0;
+  int icont;
+  if(isCaseSensitive == 1){
+    for(icont = 0; texto[icont] != '\0'; icont++){
+      if(texto[icont] == c){
+        qtdOcorrencias++;
+      }
+    }
+  }else{
+      
+    if(c >= 'A' && c <= 'Z'){
+      for(icont = 0; texto[icont] != '\0'; icont++){
+        if(texto[icont] >= 'a' && texto[icont] <= 'z'){
+          if(texto[icont]-32 == c){
+            qtdOcorrencias++;
+          }
+        }else {
+          if(texto[icont] == c){
+            qtdOcorrencias++;
+          }
+        }
+      }
+    }else if(c >= 'a' && c <= 'z'){
+      for(icont = 0; texto[icont] != '\0'; icont++){
+        if(texto[icont] >= 'A' && texto[icont] <= 'Z'){
+          if(texto[icont]+32 == c){
+            qtdOcorrencias++;
+          }
+        }else {
+          if(texto[icont] == c){
+            qtdOcorrencias++;
+          }
+        }
+      }
+    }else {
+      if(texto[icont] == c){
+            qtdOcorrencias++;
+      }
+    }
+  }
+  return qtdOcorrencias;
 }
+
 
 /*
  Q4 = encontrar palavra em texto
@@ -237,11 +457,50 @@ int q3(char *texto, char c, int isCaseSensitive)
         O retorno da função, n, nesse caso seria 1;
 
  */
-int q4(char *strTexto, char *strBusca, int posicoes[30])
-{
-    int qtdOcorrencias = -1;
+int q4(char *strTexto, char *strBusca, int posicoes[30]){
+  int qtdOcorrencias = 0;
+  int hcont, icont,jcont,kcont;
+  int p1,p2=0;
+  int ctrl;
+  int char_espec = 0;
+  int char_busca = 0;
 
-    return qtdOcorrencias;
+  hcont=0;
+
+  
+  for(icont=0; strTexto[icont] != '\0'; icont++){
+    jcont=0;
+    ctrl = 0;
+    if(strTexto[icont] == strBusca[jcont]){
+      p1 = icont+1-char_espec; 
+      
+    
+      for(jcont=0, kcont = icont; strBusca[jcont] != '\0' && strTexto[kcont] != '\0'; jcont++, kcont++){
+        if(strTexto[kcont]== -61){
+          char_espec++;
+        }
+        if(strTexto[kcont] == strBusca[jcont]){
+          ctrl++;
+        }else {
+          break;
+        }
+      }
+      
+      if(ctrl == Tam_String(strBusca)){
+        p2 = kcont - char_espec;
+        posicoes[hcont] = p1;
+        posicoes[hcont+1] = p2;
+        hcont+=2;
+        qtdOcorrencias++;
+      }
+     
+      icont += kcont - icont -1;
+    }
+    if(strTexto[icont]== -61){
+        char_espec++;
+    }
+  }
+  return qtdOcorrencias;
 }
 
 /*
@@ -255,8 +514,25 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
  */
 
 int q5(int num)
-{
-
+{ 
+  int inicio = 0;
+  int multi = 1;
+  int num2 = 0;
+  int num_aux = num;
+  
+  while(num_aux>0){
+    if(num2!=0 && inicio==1){
+      num2 = (num2*multi) + ((num_aux % 10)); 
+      num_aux/=10;
+      
+    }else {
+        num2 = (num_aux % 10);
+        multi=10;
+        num_aux/=10;
+        inicio=1;
+    }
+  }
+    num=num2;
     return num;
 }
 
@@ -269,9 +545,43 @@ int q5(int num)
  @saida
     Quantidade de vezes que número de busca ocorre em número base
  */
-
+//{2345} 34
 int q6(int numerobase, int numerobusca)
-{
-    int qtdOcorrencias;
+{   
+  int base = numerobase;
+  int busca = numerobusca;
+  int resto_base;
+  int resto_busca;
+  int tam_cont=0;
+  int validacao = 0;
+  
+  int qtdOcorrencias = 0;
+
+  //divide o numero base por 10 pegando o resto e vai comparando com o numerobusca de traz pra frente
+    while (base!=0){
+      resto_base = base % 10;
+      resto_busca = busca % 10;
+
+      if(resto_base==resto_busca){
+        tam_cont++;
+        busca /= 10;
+        validacao=1;
+      }else {
+        validacao=0;
+      }
+      
+      if(Verificar_Tam_de_Int(numerobusca) == tam_cont && validacao==1){
+        qtdOcorrencias++;
+        tam_cont = 0;
+      }else if(validacao == 0){
+        busca = numerobusca;
+        tam_cont = 0;
+      }
+      if (busca == 0 && numerobusca != 0){
+        busca=numerobusca;
+      }
+      
+      base /= 10;
+    }
     return qtdOcorrencias;
 }
