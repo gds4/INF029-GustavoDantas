@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+
 #define TAM 10
 
 #include "EstruturaVetores.h"
 
-int vetorPrincipal[TAM];
+int *vetorPrincipal[TAM];
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -21,17 +23,32 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
 
     int retorno = 0;
-    // a posicao pode já existir estrutura auxiliar
-    retorno = JA_TEM_ESTRUTURA_AUXILIAR;
-    // se posição é um valor válido {entre 1 e 10}
-    retorno = POSICAO_INVALIDA;
-    // o tamanho ser muito grande
-    retorno = SEM_ESPACO_DE_MEMORIA;
-    // o tamanho nao pode ser menor que 1
-    retorno = TAMANHO_INVALIDO;
-    // deu tudo certo, crie
+    int* ponteiroAUX;
+    
+    if(tamanho < 0){
+        tamanho = 0;
+    }
+    
+    ponteiroAUX = malloc(tamanho* sizeof(int));
+    
+    if(vetorPrincipal[posicao-1] != 0){
+        retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+    }else if(posicao < 1 || posicao > 10){
+        retorno = POSICAO_INVALIDA;
+    }else if(tamanho < 1){
+        retorno = TAMANHO_INVALIDO;
+    }else if(ponteiroAUX == NULL){
+        retorno = SEM_ESPACO_DE_MEMORIA;
+    }else{ 
+        // deu tudo certo, crie
+    
+    vetorPrincipal[posicao-1] = ponteiroAUX;
     retorno = SUCESSO;
-
+    }
+    
+    if(retorno != SUCESSO && retorno != SEM_ESPACO_DE_MEMORIA){
+        free(ponteiroAUX);
+    }
     return retorno;
 }
 
@@ -56,8 +73,12 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     else
     {
         // testar se existe a estrutura auxiliar
+        if(vetorPrincipal[posicao-1] != NULL){
+            existeEstruturaAuxiliar = 1;
+        }
         if (existeEstruturaAuxiliar)
         {
+            
             if (temEspaco)
             {
                 //insere
@@ -276,3 +297,4 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 void finalizar()
 {
 }
+
