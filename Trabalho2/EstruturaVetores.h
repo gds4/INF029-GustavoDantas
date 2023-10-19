@@ -14,6 +14,26 @@ typedef struct reg {
     struct reg *prox;
 } No;
 
+typedef struct vetor_Auxiliar{
+    int chave;
+    int cheio;
+    
+}vet_AUX;
+
+typedef struct head{
+    vet_AUX *prim;
+    int qtd;
+    int qtd_atual;
+}head;
+
+typedef struct vetor_Principal{
+    struct head *head;
+}vet_P;
+
+int getQuantidadeElementosVetorPrincipal();
+void InsertionSort(int *V,int n);
+int ehPosicaoValida(int posicao);
+void inicializarVetorAux(vet_AUX *V , int tamanho);
 int criarEstruturaAuxiliar(int posicao, int tamanho);
 int inserirNumeroEmEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
