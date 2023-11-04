@@ -1,4 +1,4 @@
-#ifndef TRABALHO2_ESTRUTURAVETORES_H
+ #ifndef TRABALHO2_ESTRUTURAVETORES_H
 #define TRABALHO2_ESTRUTURAVETORES_H
 
 // enumeracoes (enum) ajudam a deixar o codigo mais legivel, possibilitando que voce de significado

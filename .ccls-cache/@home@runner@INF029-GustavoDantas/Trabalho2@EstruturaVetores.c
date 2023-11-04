@@ -321,10 +321,10 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
     vet_AUX *aux;
     int qtd_atual_aux;
     
-    for(posicao_VP = 0 ; posicao_VP < TAM ; posicao_VP++){
-        if(vetorPrincipal[posicao_VP].head != NULL){
+    for(posicao_VP = 0 ; posicao_VP < TAM ; posicao_VP++){ 
+        if(vetorPrincipal[posicao_VP].head != NULL){  
             if(vetorPrincipal[posicao_VP].head->qtd_atual != 0){
-                estruturas_vazias = 0;
+                estruturas_vazias = 0; 
                 aux = vetorPrincipal[posicao_VP].head->prim;
                 qtd_atual_aux = vetorPrincipal[posicao_VP].head->qtd_atual;
                 
@@ -572,12 +572,7 @@ void finalizar()
     for(int i = 0 ; i < TAM ; i++){
         if(vetorPrincipal[i].head != NULL){
             aux_1 = vetorPrincipal[i].head->prim;
-            for (i = 0 ; i < vetorPrincipal[i].head->qtd ; i++){
-                aux_2 = aux_1 + 1;
-                free(aux_1);
-                aux_1 = aux_2;
-
-            }
+            free(aux_1);
             
         }
         free(vetorPrincipal[i].head);
